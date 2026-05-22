@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
   <title>Приглашение | Али & Карина</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500&family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -171,14 +171,13 @@
       color: #2c2c2c;
     }
 
-    /* ===== ИСТОРИЯ + ФОТО ПОЛАРОИД ===== */
+    /* ===== ИСТОРИЯ + ФОТО (вытянутые чуть вверх детские фото) ===== */
     .story {
       background: #ffffff;
       text-align: center;
       padding: 70px 25px;
     }
     
-    /* Детские фото: увеличены и на одной строке без прокрутки */
     .photos {
       display: flex;
       justify-content: center;
@@ -200,11 +199,12 @@
     .photo:hover {
       animation: gentleShake 0.6s ease;
     }
-    /* Увеличенные детские фото */
+    /* Детские фото: чуть вытянуты вверх (увеличили высоту, сохранили ширину) */
     .photo img {
-      width: 320px;
-      height: 320px;
+      width: 300px;
+      height: 360px;
       object-fit: cover;
+      object-position: center 20%;
       border-radius: 4px;
       display: block;
     }
@@ -503,29 +503,29 @@
       color: #3e3e3e;
     }
 
-    /* ===== БЛОК КОНТАКТОВ (без сердечек, блоки на одной строке) ===== */
+    /* ===== БЛОК КОНТАКТОВ (без значков, компактно, помещаются на мобильном экране) ===== */
     .contacts-block {
       background: var(--accent-light);
       text-align: center;
-      padding: 60px 25px;
+      padding: 50px 20px;
     }
     .contacts-block h2 {
-      font-size: clamp(34px, 7vw, 44px);
-      margin-bottom: 12px;
+      font-size: clamp(30px, 7vw, 42px);
+      margin-bottom: 8px;
       font-weight: 400;
       color: var(--accent-dark);
     }
     .contacts-block .sub {
-      font-size: clamp(22px, 5vw, 28px);
+      font-size: clamp(18px, 5vw, 24px);
       color: #a0a0a0;
-      margin-bottom: 35px;
+      margin-bottom: 28px;
     }
-    /* Контактные карточки в одну строку */
+    /* Карточки контактов: без иконок, уменьшенные отступы, гарантированно на одной строке без выхода за пределы */
     .contact-cards {
       display: flex;
       justify-content: center;
       align-items: stretch;
-      gap: 40px;
+      gap: 15px;
       flex-wrap: nowrap;
       max-width: 100%;
       margin: 0 auto;
@@ -533,42 +533,44 @@
     }
     .contact-card {
       background: white;
-      padding: 25px 20px;
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      min-width: 210px;
-      transition: transform 0.3s ease;
-      flex-shrink: 0;
+      padding: 18px 12px;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.06);
+      min-width: 145px;
+      flex: 1;
+      max-width: 180px;
+      transition: transform 0.2s ease;
+      text-align: center;
     }
     .contact-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-3px);
     }
-    /* Убираем сердечки — заменяем на нейтральные иконки */
-    .contact-icon i {
-      font-size: 42px;
-      color: var(--accent);
-      margin-bottom: 12px;
-      display: inline-block;
+    /* Полностью убираем любые иконки */
+    .contact-icon {
+      display: none;
     }
     .contact-name {
-      font-size: 22px;
-      font-weight: 500;
-      margin-bottom: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
       color: var(--accent-dark);
+      letter-spacing: 0.5px;
     }
     .contact-phone {
-      font-size: 18px;
+      font-size: 15px;
       font-weight: 500;
       margin-bottom: 8px;
       color: #333;
+      word-break: break-word;
     }
     .contact-phone a {
       color: #333;
       text-decoration: none;
     }
     .contact-tg {
-      font-size: 14px;
+      font-size: 13px;
       color: #666;
+      word-break: break-word;
     }
     .contact-tg a {
       color: var(--accent-dark);
@@ -578,17 +580,35 @@
     .contact-tg a:hover {
       text-decoration: underline;
     }
-    /* На мобильных устройствах при сильном сужении разрешаем скролл, но карточки остаются в строке */
-    @media (max-width: 560px) {
+    /* На самых узких экранах даём карточкам чуть больше свободного пространства, но они не вылазят */
+    @media (max-width: 480px) {
+      .contacts-block {
+        padding: 40px 16px;
+      }
       .contact-cards {
-        gap: 20px;
-        overflow-x: auto;
-        padding-bottom: 8px;
-        justify-content: flex-start;
-        scrollbar-width: thin;
+        gap: 12px;
       }
       .contact-card {
-        min-width: 190px;
+        min-width: 130px;
+        padding: 14px 8px;
+      }
+      .contact-name {
+        font-size: 18px;
+      }
+      .contact-phone {
+        font-size: 13px;
+      }
+      .contact-tg {
+        font-size: 11px;
+      }
+    }
+    @media (max-width: 380px) {
+      .contact-card {
+        min-width: 120px;
+        padding: 12px 6px;
+      }
+      .contact-name {
+        font-size: 16px;
       }
     }
 
@@ -852,11 +872,11 @@
       transform: translateY(-3px);
     }
 
-    /* Адаптив для увеличенных детских фото */
+    /* Адаптив для увеличенных/вытянутых детских фото */
     @media (max-width: 800px) {
       .photo img {
-        width: 260px;
-        height: 260px;
+        width: 250px;
+        height: 300px;
       }
       .photos {
         gap: 30px;
@@ -864,8 +884,8 @@
     }
     @media (max-width: 650px) {
       .photo img {
-        width: 210px;
-        height: 210px;
+        width: 200px;
+        height: 250px;
       }
       .photos {
         gap: 20px;
@@ -876,17 +896,17 @@
     }
     @media (max-width: 530px) {
       .photo img {
-        width: 170px;
-        height: 170px;
+        width: 160px;
+        height: 200px;
       }
       .photos {
-        gap: 18px;
+        gap: 16px;
       }
     }
     @media (max-width: 440px) {
       .photo img {
-        width: 140px;
-        height: 140px;
+        width: 135px;
+        height: 170px;
       }
       .photos {
         gap: 12px;
@@ -937,7 +957,7 @@
   <audio id="weddingAudio" src="песня.mp3" loop preload="auto"></audio>
 </div>
 
-<!-- ИСТОРИЯ: увеличенные детские фото, на одной строке -->
+<!-- ИСТОРИЯ: вытянутые детские фото -->
 <section class="story animate-on-scroll">
   <div class="photos">
     <div class="photo"><img src="1.jpeg" alt="Детское фото"></div>
@@ -955,18 +975,16 @@
   <p>Хотим, чтобы вы разделили с нами радость и были на торжестве в самый лучший и трогательный день в нашей жизни!</p>
 </section>
 
-<!-- КАЛЕНДАРЬ (АВГУСТ 2026: 1 августа - суббота, правильная сетка) -->
+<!-- КАЛЕНДАРЬ (правильная сетка) -->
 <section class="calendar-block animate-on-scroll">
   <div class="month">— Август 2026 —</div>
   <div class="weekdays"><span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span></div>
-  <div class="days" id="calendarDays">
-    <!-- Сетка будет заполнена через JS для абсолютной точности -->
-  </div>
+  <div class="days" id="calendarDays"></div>
   <div class="calendar-date">07.08.2026</div>
   <p class="footer-text">Мы будем безумно рады видеть вас в кругу наших гостей!</p>
 </section>
 
-<!-- МЕСТО ПРОВЕДЕНИЯ Grand Hall -->
+<!-- МЕСТО ПРОВЕДЕНИЯ -->
 <section class="location animate-on-scroll">
   <h2>МЕСТО<br>ПРОВЕДЕНИЯ</h2>
   <div class="sub">location</div>
@@ -1022,22 +1040,10 @@
   <div class="content">
     <h1>ДО НАШЕЙ СВАДЬБЫ ОСТАЛОСЬ:</h1>
     <div class="timer">
-      <div class="timer-item">
-        <span class="timer-digit" id="weddingDays">0</span>
-        <span class="timer-label">ДНЕЙ</span>
-      </div>
-      <div class="timer-item">
-        <span class="timer-digit" id="weddingHours">0</span>
-        <span class="timer-label">ЧАСОВ</span>
-      </div>
-      <div class="timer-item">
-        <span class="timer-digit" id="weddingMinutes">0</span>
-        <span class="timer-label">МИНУТ</span>
-      </div>
-      <div class="timer-item">
-        <span class="timer-digit" id="weddingSeconds">0</span>
-        <span class="timer-label">СЕКУНД</span>
-      </div>
+      <div class="timer-item"><span class="timer-digit" id="weddingDays">0</span><span class="timer-label">ДНЕЙ</span></div>
+      <div class="timer-item"><span class="timer-digit" id="weddingHours">0</span><span class="timer-label">ЧАСОВ</span></div>
+      <div class="timer-item"><span class="timer-digit" id="weddingMinutes">0</span><span class="timer-label">МИНУТ</span></div>
+      <div class="timer-item"><span class="timer-digit" id="weddingSeconds">0</span><span class="timer-label">СЕКУНД</span></div>
     </div>
   </div>
 </section>
@@ -1050,42 +1056,37 @@
     <form id="rsvpForm" action="https://formspree.io/f/mlgvbgee" method="POST">
       <label>Ваше имя и фамилия</label>
       <input type="text" name="Имя и фамилия" placeholder="Имя и фамилия" required>
-      
       <label>Сможете ли Вы присутствовать</label>
       <div class="radio-group">
         <label><input type="radio" name="Присутствие" value="Да, смогу"> Да, смогу</label>
         <label><input type="radio" name="Присутствие" value="Нет, не смогу"> Нет, не смогу</label>
       </div>
-
-      <label>Предпочтения в напитках (можно выбрать несколько)</label>
+      <label>Предпочтения в напитках</label>
       <div class="checkbox-group">
         <label><input type="checkbox" name="Напитки" value="Красное вино"> Красное вино</label>
         <label><input type="checkbox" name="Напитки" value="Белое вино"> Белое вино</label>
         <label><input type="checkbox" name="Напитки" value="Шампанское"> Шампанское</label>
         <label><input type="checkbox" name="Напитки" value="Водка"> Водка</label>
         <label><input type="checkbox" name="Напитки" value="Коньяк"> Коньяк</label>
-        <label><input type="checkbox" name="Напитки" value="Безалкогольные напитки"> Безалкогольные напитки</label>
+        <label><input type="checkbox" name="Напитки" value="Безалкогольные напитки"> Безалкогольные</label>
       </div>
-      <input type="text" name="Другой напиток" placeholder="Другое (впишите свой вариант)" style="margin-top: 6px;">
-
+      <input type="text" name="Другой напиток" placeholder="Другое" style="margin-top: 6px;">
       <button type="submit">Отправить</button>
     </form>
   </div>
 </section>
 
-<!-- КОНТАКТЫ (без сердечек, блоки на одной строке) -->
+<!-- КОНТАКТЫ (без значков и иконок, компактно, помещаются на экране) -->
 <section class="contacts-block animate-on-scroll">
   <h2>КОНТАКТЫ</h2>
   <div class="sub">связь с нами</div>
   <div class="contact-cards">
     <div class="contact-card">
-      <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
       <div class="contact-name">Карина</div>
       <div class="contact-phone"><a href="tel:+79085422286">+7 (908) 542-22-86</a></div>
       <div class="contact-tg"><a href="https://t.me/karinaaaa_01">@karinaaaa_01</a></div>
     </div>
     <div class="contact-card">
-      <div class="contact-icon"><i class="fas fa-paper-plane"></i></div>
       <div class="contact-name">Али</div>
       <div class="contact-phone"><a href="tel:+79172160414">+7 (917) 216-04-14</a></div>
       <div class="contact-tg"><a href="https://t.me/taisumovali">@taisumovali</a></div>
@@ -1094,86 +1095,53 @@
 </section>
 
 <script>
-  // === АНИМАЦИЯ ПОЯВЛЕНИЯ ПРИ СКРОЛЛЕ ===
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-  };
+  // Анимация появления
+  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
   }, observerOptions);
-  document.querySelectorAll('.animate-on-scroll').forEach(el => {
-    observer.observe(el);
-  });
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
 
   // Музыка
   const audio = document.getElementById('weddingAudio');
   const toggleBtn = document.getElementById('musicToggleBtn');
-  function updateButtonIcon() {
-    toggleBtn.innerHTML = audio.paused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>';
-  }
-  toggleBtn.addEventListener('click', () => {
-    if (audio.paused) audio.play().catch(e => console.log);
-    else audio.pause();
-    updateButtonIcon();
-  });
+  function updateButtonIcon() { toggleBtn.innerHTML = audio.paused ? '<i class="fas fa-play"></i>' : '<i class="fas fa-pause"></i>'; }
+  toggleBtn.addEventListener('click', () => { if (audio.paused) audio.play().catch(e => console.log); else audio.pause(); updateButtonIcon(); });
   updateButtonIcon();
   audio.addEventListener('ended', () => { if (audio.loop) audio.play(); });
 
-  // Таймер до 7 августа 2026
+  // Таймер
   const weddingDate = new Date("2026-08-07T00:00:00").getTime();
   function updateWeddingTimer() {
     const now = new Date().getTime();
     const diff = weddingDate - now;
     if (diff <= 0) {
-      document.getElementById("weddingDays").innerText = "0";
-      document.getElementById("weddingHours").innerText = "00";
-      document.getElementById("weddingMinutes").innerText = "00";
-      document.getElementById("weddingSeconds").innerText = "00";
+      document.getElementById("weddingDays").innerText = "0"; document.getElementById("weddingHours").innerText = "00";
+      document.getElementById("weddingMinutes").innerText = "00"; document.getElementById("weddingSeconds").innerText = "00";
       return;
     }
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((diff % (1000*60)) / 1000);
     document.getElementById("weddingDays").innerText = days;
     document.getElementById("weddingHours").innerText = hours < 10 ? "0"+hours : hours;
     document.getElementById("weddingMinutes").innerText = minutes < 10 ? "0"+minutes : minutes;
     document.getElementById("weddingSeconds").innerText = seconds < 10 ? "0"+seconds : seconds;
   }
-  setInterval(updateWeddingTimer, 1000);
-  updateWeddingTimer();
+  setInterval(updateWeddingTimer, 1000); updateWeddingTimer();
 
   // Слайдер
   const sliderWrapper = document.getElementById('sliderWrapper');
   const slides = document.querySelectorAll('.slide');
-  const prevBtn = document.getElementById('prevSlide');
-  const nextBtn = document.getElementById('nextSlide');
+  const prevBtn = document.getElementById('prevSlide'), nextBtn = document.getElementById('nextSlide');
   const dotsContainer = document.getElementById('sliderDots');
   let currentIndex = 0;
   const totalSlides = slides.length;
-  function updateSlider() {
-    sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-    document.querySelectorAll('.dot').forEach((dot, idx) => { dot.classList.toggle('active', idx === currentIndex); });
-  }
-  function createDots() {
-    dotsContainer.innerHTML = '';
-    for (let i = 0; i < totalSlides; i++) {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      if (i === currentIndex) dot.classList.add('active');
-      dot.addEventListener('click', () => { currentIndex = i; updateSlider(); });
-      dotsContainer.appendChild(dot);
-    }
-  }
-  prevBtn.addEventListener('click', () => { currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; updateSlider(); });
-  nextBtn.addEventListener('click', () => { currentIndex = (currentIndex + 1) % totalSlides; updateSlider(); });
+  function updateSlider() { sliderWrapper.style.transform = `translateX(-${currentIndex * 100}%)`; document.querySelectorAll('.dot').forEach((dot, idx) => dot.classList.toggle('active', idx === currentIndex)); }
+  function createDots() { dotsContainer.innerHTML = ''; for (let i=0; i<totalSlides; i++) { const dot = document.createElement('span'); dot.classList.add('dot'); if(i===currentIndex) dot.classList.add('active'); dot.addEventListener('click',()=>{currentIndex=i; updateSlider();}); dotsContainer.appendChild(dot); } }
+  prevBtn.addEventListener('click',()=>{currentIndex=(currentIndex-1+totalSlides)%totalSlides; updateSlider();});
+  nextBtn.addEventListener('click',()=>{currentIndex=(currentIndex+1)%totalSlides; updateSlider();});
   createDots();
 
   // Форма RSVP
@@ -1182,64 +1150,30 @@
     e.preventDefault();
     const formData = new FormData(rsvpForm);
     try {
-      const response = await fetch(rsvpForm.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        alert('Спасибо! Ваш ответ успешно отправлен.');
-        rsvpForm.reset();
-      } else {
-        alert('Произошла ошибка при отправке. Пожалуйста, попробуйте еще раз.');
-      }
-    } catch (error) {
-      alert('Произошла ошибка при отправке. Пожалуйста, проверьте подключение к интернету.');
-    }
+      const response = await fetch(rsvpForm.action, { method: 'POST', body: formData, headers: { 'Accept': 'application/json' } });
+      if (response.ok) { alert('Спасибо! Ваш ответ успешно отправлен.'); rsvpForm.reset(); } 
+      else { alert('Ошибка при отправке. Попробуйте еще раз.'); }
+    } catch (error) { alert('Ошибка соединения.'); }
   });
 
-  // КАЛЕНДАРЬ: правильная сетка на август 2026 (1 августа - суббота)
+  // Календарь август 2026
   function buildCalendar() {
     const daysContainer = document.getElementById('calendarDays');
-    if (!daysContainer) return;
-    const year = 2026;
-    const month = 7; // август (0-индекс: 7)
-    const firstDayOfMonth = new Date(year, month, 1);
-    // 0 = воскресенье, но нам нужно понедельник первым. Определим индекс понедельника.
-    let startOffset = firstDayOfMonth.getDay(); // 0=вс,1=пн,...6=сб
-    // Для русской недели (пн первый) – если воскресенье (0) то ставим 6, иначе startOffset-1
+    if(!daysContainer) return;
+    const year = 2026, month = 7;
+    const firstDay = new Date(year, month, 1);
+    let startOffset = firstDay.getDay();
     if (startOffset === 0) startOffset = 6;
     else startOffset = startOffset - 1;
-    
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const calendarCells = [];
-    // Пустые ячейки до первого дня
-    for (let i = 0; i < startOffset; i++) {
-      calendarCells.push('<span></span>');
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+    let cells = [];
+    for(let i=0; i<startOffset; i++) cells.push('<span></span>');
+    for(let d=1; d<=daysInMonth; d++) {
+      if(d===7) cells.push(`<span><div class="heart-number"><i class="fas fa-heart"></i><span>7</span></div></span>`);
+      else cells.push(`<span>${d}</span>`);
     }
-    // Дни месяца
-    for (let d = 1; d <= daysInMonth; d++) {
-      if (d === 7) {
-        // 7 августа с сердечком
-        calendarCells.push(`
-          <span>
-            <div class="heart-number">
-              <i class="fas fa-heart"></i>
-              <span>7</span>
-            </div>
-          </span>
-        `);
-      } else {
-        calendarCells.push(`<span>${d}</span>`);
-      }
-    }
-    // Добиваем до 6 строк (42 ячейки)
-    const totalCells = 42;
-    const currentLength = calendarCells.length;
-    for (let i = currentLength; i < totalCells; i++) {
-      calendarCells.push('<span></span>');
-    }
-    daysContainer.innerHTML = calendarCells.join('');
+    while(cells.length < 42) cells.push('<span></span>');
+    daysContainer.innerHTML = cells.join('');
   }
   buildCalendar();
 </script>
