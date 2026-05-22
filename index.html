@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -177,15 +178,16 @@
       padding: 70px 25px;
     }
     
+    /* Детские фото: увеличены и на одной строке без прокрутки */
     .photos {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 40px;
       flex-wrap: nowrap;
-      margin-bottom: 50px;
       overflow-x: visible;
       width: 100%;
+      margin-bottom: 50px;
     }
     
     .photo {
@@ -198,9 +200,10 @@
     .photo:hover {
       animation: gentleShake 0.6s ease;
     }
+    /* Увеличенные детские фото */
     .photo img {
-      width: 280px;
-      height: 280px;
+      width: 320px;
+      height: 320px;
       object-fit: cover;
       border-radius: 4px;
       display: block;
@@ -279,7 +282,7 @@
       padding: 0 10px;
     }
 
-    /* ===== КАЛЕНДАРЬ (07.08.2026 ПЯТНИЦА) ===== */
+    /* ===== КАЛЕНДАРЬ (АВГУСТ 2026: 1 августа - СУББОТА) ===== */
     .calendar-block {
       background: #ffffff;
       text-align: center;
@@ -426,7 +429,7 @@
     .p1-wrap { --rot: -6deg; position: relative; top: -10px; }
     .p2-wrap { --rot: 6deg; position: relative; top: 14px; }
 
-    /* ===== ТАЙМИНГ ДНЯ (НОВЫЙ) ===== */
+    /* ===== ТАЙМИНГ ДНЯ ===== */
     .timing {
       background: var(--accent-light);
       color: var(--accent-text);
@@ -466,7 +469,7 @@
     .timing .title { font-size: 22px; font-weight: 500; color: var(--accent-text); }
     .desc { font-size: 16px; opacity: 0.85; margin-top: 8px; font-style: italic; }
 
-    /* ===== ДРЕСС-КОД (только текст) ===== */
+    /* ===== ДРЕСС-КОД ===== */
     .dresscode-section {
       background: #ffffff;
       text-align: center;
@@ -500,7 +503,7 @@
       color: #3e3e3e;
     }
 
-    /* ===== БЛОК КОНТАКТОВ ===== */
+    /* ===== БЛОК КОНТАКТОВ (без сердечек, блоки на одной строке) ===== */
     .contacts-block {
       background: var(--accent-light);
       text-align: center;
@@ -517,29 +520,35 @@
       color: #a0a0a0;
       margin-bottom: 35px;
     }
+    /* Контактные карточки в одну строку */
     .contact-cards {
       display: flex;
       justify-content: center;
+      align-items: stretch;
       gap: 40px;
-      flex-wrap: wrap;
-      max-width: 500px;
+      flex-wrap: nowrap;
+      max-width: 100%;
       margin: 0 auto;
+      overflow-x: visible;
     }
     .contact-card {
       background: white;
       padding: 25px 20px;
       border-radius: 16px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-      min-width: 200px;
+      min-width: 210px;
       transition: transform 0.3s ease;
+      flex-shrink: 0;
     }
     .contact-card:hover {
       transform: translateY(-5px);
     }
-    .contact-icon {
+    /* Убираем сердечки — заменяем на нейтральные иконки */
+    .contact-icon i {
       font-size: 42px;
       color: var(--accent);
       margin-bottom: 12px;
+      display: inline-block;
     }
     .contact-name {
       font-size: 22px;
@@ -568,6 +577,19 @@
     }
     .contact-tg a:hover {
       text-decoration: underline;
+    }
+    /* На мобильных устройствах при сильном сужении разрешаем скролл, но карточки остаются в строке */
+    @media (max-width: 560px) {
+      .contact-cards {
+        gap: 20px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        justify-content: flex-start;
+        scrollbar-width: thin;
+      }
+      .contact-card {
+        min-width: 190px;
+      }
     }
 
     /* ===== СЛАЙДЕР ===== */
@@ -830,24 +852,45 @@
       transform: translateY(-3px);
     }
 
-    @media (max-width: 700px) {
-      .photos { gap: 30px; }
-      .photo img { width: 220px; height: 220px; }
-      .photo { padding: 15px 15px 25px 15px; }
-      .photo:first-child { transform: translateY(-4px) translateX(-2px) rotate(-2deg); }
-      .photo:last-child { transform: translateY(4px) translateX(2px) rotate(2deg); }
+    /* Адаптив для увеличенных детских фото */
+    @media (max-width: 800px) {
+      .photo img {
+        width: 260px;
+        height: 260px;
+      }
+      .photos {
+        gap: 30px;
+      }
     }
-
-    @media (max-width: 550px) {
-      .photos { gap: 20px; }
-      .photo img { width: 170px; height: 170px; }
-      .photo { padding: 12px 12px 18px 12px; }
+    @media (max-width: 650px) {
+      .photo img {
+        width: 210px;
+        height: 210px;
+      }
+      .photos {
+        gap: 20px;
+      }
+      .photo {
+        padding: 15px 15px 25px 15px;
+      }
     }
-
-    @media (max-width: 400px) {
-      .photos { gap: 15px; }
-      .photo img { width: 140px; height: 140px; }
-      .photo { padding: 10px 10px 15px 10px; }
+    @media (max-width: 530px) {
+      .photo img {
+        width: 170px;
+        height: 170px;
+      }
+      .photos {
+        gap: 18px;
+      }
+    }
+    @media (max-width: 440px) {
+      .photo img {
+        width: 140px;
+        height: 140px;
+      }
+      .photos {
+        gap: 12px;
+      }
     }
 
     @media (max-width: 600px) {
@@ -872,8 +915,6 @@
       .wedding-block .content { padding: 45px 16px 40px 16px; }
       .names { bottom: 10%; }
       .wedding-block h1 { white-space: normal; font-size: clamp(22px, 7vw, 40px); }
-      .contact-cards { gap: 20px; }
-      .contact-card { min-width: 170px; padding: 18px 15px; }
     }
   </style>
 </head>
@@ -896,7 +937,7 @@
   <audio id="weddingAudio" src="песня.mp3" loop preload="auto"></audio>
 </div>
 
-<!-- ИСТОРИЯ -->
+<!-- ИСТОРИЯ: увеличенные детские фото, на одной строке -->
 <section class="story animate-on-scroll">
   <div class="photos">
     <div class="photo"><img src="1.jpeg" alt="Детское фото"></div>
@@ -914,23 +955,12 @@
   <p>Хотим, чтобы вы разделили с нами радость и были на торжестве в самый лучший и трогательный день в нашей жизни!</p>
 </section>
 
-<!-- КАЛЕНДАРЬ (07.08.2026 ПЯТНИЦА) -->
+<!-- КАЛЕНДАРЬ (АВГУСТ 2026: 1 августа - суббота, правильная сетка) -->
 <section class="calendar-block animate-on-scroll">
   <div class="month">— Август 2026 —</div>
   <div class="weekdays"><span>ПН</span><span>ВТ</span><span>СР</span><span>ЧТ</span><span>ПТ</span><span>СБ</span><span>ВС</span></div>
-  <div class="days">
-    <span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span>
-    <span>
-      <div class="heart-number">
-        <i class="fas fa-heart"></i>
-        <span>7</span>
-      </div>
-    </span>
-    <span>8</span><span>9</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span>
-    <span>15</span><span>16</span><span>17</span><span>18</span><span>19</span><span>20</span><span>21</span>
-    <span>22</span><span>23</span><span>24</span><span>25</span><span>26</span><span>27</span><span>28</span>
-    <span>29</span><span>30</span><span>31</span>
-    <span></span><span></span><span></span><span></span>
+  <div class="days" id="calendarDays">
+    <!-- Сетка будет заполнена через JS для абсолютной точности -->
   </div>
   <div class="calendar-date">07.08.2026</div>
   <p class="footer-text">Мы будем безумно рады видеть вас в кругу наших гостей!</p>
@@ -950,7 +980,7 @@
   </div>
 </section>
 
-<!-- ТАЙМИНГ ДНЯ (новый) -->
+<!-- ТАЙМИНГ ДНЯ -->
 <section class="timing animate-on-scroll">
   <h2>ТАЙМИНГ ДНЯ</h2>
   <div class="sub">Timing</div>
@@ -962,7 +992,7 @@
   </div>
 </section>
 
-<!-- ДРЕСС-КОД (только текст) -->
+<!-- ДРЕСС-КОД -->
 <section class="dresscode-section animate-on-scroll">
   <h2>ДРЕСС-КОД</h2>
   <div class="subtitle">dress-code</div>
@@ -1012,7 +1042,7 @@
   </div>
 </section>
 
-<!-- АНКЕТА ГОСТЯ (форма на formspree) -->
+<!-- АНКЕТА ГОСТЯ -->
 <section class="rsvp animate-on-scroll">
   <div class="container">
     <h2>АНКЕТА ГОСТЯ</h2>
@@ -1043,19 +1073,19 @@
   </div>
 </section>
 
-<!-- КОНТАКТЫ -->
+<!-- КОНТАКТЫ (без сердечек, блоки на одной строке) -->
 <section class="contacts-block animate-on-scroll">
   <h2>КОНТАКТЫ</h2>
   <div class="sub">связь с нами</div>
   <div class="contact-cards">
     <div class="contact-card">
-      <div class="contact-icon"><i class="fas fa-heart"></i></div>
+      <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
       <div class="contact-name">Карина</div>
       <div class="contact-phone"><a href="tel:+79085422286">+7 (908) 542-22-86</a></div>
       <div class="contact-tg"><a href="https://t.me/karinaaaa_01">@karinaaaa_01</a></div>
     </div>
     <div class="contact-card">
-      <div class="contact-icon"><i class="fas fa-heart"></i></div>
+      <div class="contact-icon"><i class="fas fa-paper-plane"></i></div>
       <div class="contact-name">Али</div>
       <div class="contact-phone"><a href="tel:+79172160414">+7 (917) 216-04-14</a></div>
       <div class="contact-tg"><a href="https://t.me/taisumovali">@taisumovali</a></div>
@@ -1070,8 +1100,7 @@
     rootMargin: '0px',
     threshold: 0.15
   };
-
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
@@ -1079,7 +1108,6 @@
       }
     });
   }, observerOptions);
-
   document.querySelectorAll('.animate-on-scroll').forEach(el => {
     observer.observe(el);
   });
@@ -1169,6 +1197,51 @@
       alert('Произошла ошибка при отправке. Пожалуйста, проверьте подключение к интернету.');
     }
   });
+
+  // КАЛЕНДАРЬ: правильная сетка на август 2026 (1 августа - суббота)
+  function buildCalendar() {
+    const daysContainer = document.getElementById('calendarDays');
+    if (!daysContainer) return;
+    const year = 2026;
+    const month = 7; // август (0-индекс: 7)
+    const firstDayOfMonth = new Date(year, month, 1);
+    // 0 = воскресенье, но нам нужно понедельник первым. Определим индекс понедельника.
+    let startOffset = firstDayOfMonth.getDay(); // 0=вс,1=пн,...6=сб
+    // Для русской недели (пн первый) – если воскресенье (0) то ставим 6, иначе startOffset-1
+    if (startOffset === 0) startOffset = 6;
+    else startOffset = startOffset - 1;
+    
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const calendarCells = [];
+    // Пустые ячейки до первого дня
+    for (let i = 0; i < startOffset; i++) {
+      calendarCells.push('<span></span>');
+    }
+    // Дни месяца
+    for (let d = 1; d <= daysInMonth; d++) {
+      if (d === 7) {
+        // 7 августа с сердечком
+        calendarCells.push(`
+          <span>
+            <div class="heart-number">
+              <i class="fas fa-heart"></i>
+              <span>7</span>
+            </div>
+          </span>
+        `);
+      } else {
+        calendarCells.push(`<span>${d}</span>`);
+      }
+    }
+    // Добиваем до 6 строк (42 ячейки)
+    const totalCells = 42;
+    const currentLength = calendarCells.length;
+    for (let i = currentLength; i < totalCells; i++) {
+      calendarCells.push('<span></span>');
+    }
+    daysContainer.innerHTML = calendarCells.join('');
+  }
+  buildCalendar();
 </script>
 </body>
 </html>
